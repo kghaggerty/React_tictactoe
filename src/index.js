@@ -6,14 +6,14 @@ class Square extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            value: null,
+            squares: Array(9).fill(null),
         }
     }
     render() {
       return (
         <button className="square" onClick={() =>
-            alert('click')}>
-          {this.props.value}
+            this.setState({value: 'X'})}>
+          {this.state.value}
         </button>
       );
     }
@@ -21,9 +21,13 @@ class Square extends React.Component {
   
   class Board extends React.Component {
     renderSquare(i) {
-      return <Square value={i} />;
-    }
-  
+        return (
+          <Square
+            value={this.state.squares[i]}
+            onClick={() => this.handleClick(i)}
+          />
+        );
+      }
     render() {
       const status = 'Next player: X';
   
